@@ -83,6 +83,31 @@ app.get('/buckets', async (req, res) => {
   }
 });
 
+app.post('/buckets/createbucket', async (req, res) => {
+  const bucketName = req.body.bucketName; // Get the bucket name from body parameters
+  if (!bucketName) {
+    return res.status(400).send('Bucket name is required.');
+  }
+  // Check if the bucket already exists 
+  const existingBuckets = await s3.listBuckets().promise();
+  const bucketExists = existingBuckets.Buckets.some(bucket => bucket.Name === bucketName);
+  if (bucketExists) { 
+    return res.status(400).send(`Bucket ${bucketName} already exists.`);
+  } 
+  // Create the bucket
+  const params = {
+    Bucket: bucketName, 
+  };
+
+  try {
+    await s3.createBucket(params).promise();
+    res.send(`Bucket ${bucketName} created.`);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Bucket creation failed.');
+  }
+});
+
 app.get('/buckets/:bucketName/files', async (req, res) => {
   const bucketName = req.params.bucketName;
   const params = { Bucket: bucketName };

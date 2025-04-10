@@ -21,3 +21,6 @@ setup.ps1
 # Environment
 .env
 *.env
+
+
+test.rest
