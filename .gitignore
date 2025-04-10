@@ -1,0 +1,23 @@
+# Ignore test files (if temporary)
+test.txt
+hello.json
+
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+
+# LocalStack data (ignore folder and contents)
+LocalStack/data/
+LocalStack/volume/
+
+# Archives
+*.zip
+
+# Scripts (optional)
+setup.ps1
+
+# Environment
+.env
+*.env

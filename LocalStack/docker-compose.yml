@@ -1,0 +1,18 @@
+
+
+services:
+  localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME:-localstack-main}"
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gate0way
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      - LOCALSTACK_HOSTNAME=localstack
+      - EDGE_PORT=4566
+      - DEBUG=${DEBUG:-0}
+      - PERSISTENCE=1
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "${LOCALSTACK_VOLUME_DIR:-./data}:/tmp"
+      - "/var/run/docker.sock:/var/run/docker.sock"
