@@ -43,12 +43,12 @@ def handler(event, context):
                 "UploadDate": response["LastModified"].isoformat()
             }
             table.put_item(Item=metadata)
-            print(f"✅ File '{key}' uploaded and metadata saved.")
+            print(f"File '{key}' uploaded and metadata saved.")
 
         elif event_name.startswith("ObjectRemoved"):
             # Delete event - remove from DynamoDB
             table.delete_item(Key={"FileName": key})
-            print(f"🗑️ File '{key}' deleted from S3. Metadata removed.")
+            print(f"File '{key}' deleted from S3. Metadata removed.")
 
     return {
         "statusCode": 200,
