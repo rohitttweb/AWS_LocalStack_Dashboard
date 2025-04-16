@@ -1,0 +1,11 @@
+{
+    "LambdaFunctionConfigurations": [
+      {
+        "LambdaFunctionArn": "arn:aws:lambda:ap-south-1:000000000000:function:s3-reader",
+        "Events": [
+          "s3:ObjectCreated:*",
+          "s3:ObjectRemoved:*"
+        ]
+      }
+    ]
+  }
